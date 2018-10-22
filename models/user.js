@@ -12,4 +12,4 @@ const ModelClass = mongoose.model('user', userSchema);
 
 
 // Export model
-modules.export = ModelClass;
+module.exports = ModelClass;
