@@ -2,7 +2,12 @@ const User = require('../models/user');
 
 exports.signup = function(req, res, next) {
   const email = req.body.email;
-  const password = req.body.email;
+  const password = req.body.password;
+
+  if(!email || !password){
+    return res.status(422).send({ error: "Missing username or password." })
+  }
+
 
   // See if user exists
   User.findOne({ email: email}, function(err, existingUser){
@@ -14,7 +19,7 @@ exports.signup = function(req, res, next) {
 
     // If existing user found, return an error
     if(existingUser){
-      res.status(422).send({ error: "Email is in use." });
+      return res.status(422).send({ error: "Email is in use." });
       // 422: Unprocessable entity. Couldnt process, supplied data is bad
     }
 
@@ -27,7 +32,7 @@ exports.signup = function(req, res, next) {
       if(err){ return next(err); }
 
       // Respond to request indicating the user was created
-      res.json(user);
+      return res.send({ success: 'true'});
     });
   });
 }
