@@ -24,17 +24,7 @@ const localLogin = new LocalStrategy(localOptions, function(email, password, don
 
     });
   });
-
-
-
 });
-// tell it where to look in req to get access to email and password
-// looks for "username" and "password" by default, options says look for
-// username at the "email" property of the request instead
-// so after the local strategy parses the request, it pulls out the email
-// and the password and hands it to us in the callback. Then verify.
-
-
 
 // Setup options for JWT JwtStrategy
 const jwtOptions = {
@@ -56,9 +46,7 @@ const jwtLogin = new JwtStrategy(jwtOptions, function(payload, done){
     else {
       done(null, false);
     }
-
   });
-
 });
 
 // Tell passport to use this strategy
